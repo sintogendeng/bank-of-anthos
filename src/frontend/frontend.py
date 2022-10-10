@@ -98,6 +98,7 @@ def create_app():
         display_name = token_data['name']
         username = token_data['user']
         account_id = token_data['acct']
+        app_version = os.getenv('APP_VERSION', 'null')
 
         hed = {'Authorization': 'Bearer ' + token}
         # get balance
@@ -144,7 +145,9 @@ def create_app():
                                account_id=account_id,
                                contacts=contacts,
                                message=request.args.get('msg', None),
-                               bank_name=os.getenv('BANK_NAME', 'Bank of Anthos'))
+                               bank_name=os.getenv('BANK_NAME', 'Bank of Anthos'),
+                               app_version=app_version
+                               )
 
     def _populate_contact_labels(account_id, transactions, contacts):
         """
@@ -359,7 +362,7 @@ def create_app():
         app_name = request.args.get('app_name')
         redirect_uri = request.args.get('redirect_uri')
         state = request.args.get('state')
-        app_version = os.getenv('APP_VERSION_COMMIT', 'null')
+        app_version = os.getenv('APP_VERSION', 'null')
         if ('REGISTERED_OAUTH_CLIENT_ID' in os.environ and
             'ALLOWED_OAUTH_REDIRECT_URI' in os.environ and
             response_type == 'code'):
