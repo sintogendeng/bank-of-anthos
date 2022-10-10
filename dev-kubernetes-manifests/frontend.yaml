@@ -21,6 +21,8 @@ spec:
   selector:
     matchLabels:
       app: frontend
+  labels:
+    app.kubernetes.io/name: frontend
   template:
     metadata:
       labels:
