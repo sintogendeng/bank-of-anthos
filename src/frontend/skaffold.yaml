@@ -1,0 +1,14 @@
+# [START gke_bank_of_anthos_skaffold_config_frontend]
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: frontend # module defining frontend service
+build:
+  artifacts:
+  # - image: frontend
+  - image: gcr.io/$PROJECT_ID/sanket-gitops-image/github.com/sintogendeng/bank-of-anthos:$COMMIT_SHA
+deploy:
+  kubectl:
+    manifests:
+    - ../../dev-kubernetes-manifests/frontend.yaml
+# [END gke_bank_of_anthos_skaffold_config_frontend]

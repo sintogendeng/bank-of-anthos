@@ -42,7 +42,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: frontend
+        image: gcr.io/mainlab1/github.com/sintogendeng/bank-of-anthos:APP_VERSION_COMMIT
         volumeMounts:
         - name: publickey
           mountPath: "/tmp/.ssh"
@@ -50,6 +50,8 @@ spec:
         - mountPath: /tmp
           name: tmp
         env:
+        - name: APP_VERSION
+          value: APP_VERSION_COMMIT
         - name: VERSION
           value: "dev"
         - name: PORT
