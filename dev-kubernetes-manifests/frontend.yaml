@@ -21,12 +21,10 @@ spec:
   selector:
     matchLabels:
       app: frontend
-      app.kubernetes.io/name: frontend
   template:
     metadata:
       labels:
         app: frontend
-        app.kubernetes.io/name: frontend
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
