@@ -359,6 +359,7 @@ def create_app():
         app_name = request.args.get('app_name')
         redirect_uri = request.args.get('redirect_uri')
         state = request.args.get('state')
+        app_version = os.getenv('APP_VERSION_COMMIT', 'null')
         if ('REGISTERED_OAUTH_CLIENT_ID' in os.environ and
             'ALLOWED_OAUTH_REDIRECT_URI' in os.environ and
             response_type == 'code'):
@@ -401,7 +402,9 @@ def create_app():
                                response_type=response_type,
                                state=state,
                                redirect_uri=redirect_uri,
-                               app_name=app_name)
+                               app_name=app_name,
+                               app_version=app_version
+                               )
 
     @app.route('/login', methods=['POST'])
     def login():
