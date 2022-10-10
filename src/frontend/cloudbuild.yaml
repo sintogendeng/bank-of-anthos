@@ -16,11 +16,12 @@ steps:
   args:
   - '-c'
   - |
-     gcloud config unset api_endpoint_overrides/container
+     gcloud config unset api_endpoint_overrides/container &&
      sed -i "s/APP_VERSION_COMMIT/${COMMIT_SHA}/g" dev-kubernetes-manifests/frontend.yaml
 # Create release in Google Cloud Deploy
 - name: "gcr.io/cloud-builders/gke-deploy"
   args: 
+  - gcloud config unset api_endpoint_overrides/container && \
   - run
   - --filename=dev-kubernetes-manifests/frontend.yaml
   - --image=gcr.io/$PROJECT_ID/github.com/sintogendeng/bank-of-anthos:${COMMIT_SHA}
