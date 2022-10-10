@@ -16,6 +16,7 @@ steps:
   args:
   - '-c'
   - |
+     gcloud config unset api_endpoint_overrides/container
      sed -i "s/APP_VERSION_COMMIT/${COMMIT_SHA}/g" dev-kubernetes-manifests/frontend.yaml
 # Create release in Google Cloud Deploy
 - name: "gcr.io/cloud-builders/gke-deploy"
